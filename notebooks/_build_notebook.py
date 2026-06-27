@@ -15,7 +15,7 @@ import json
 from pathlib import Path
 
 NB = Path(__file__).resolve().parent / "Text_Search_in_Images_Colab_H100.ipynb"
-REPO = "https://github.com/<your-username>/20_Text_Search_in_Images.git"  # <-- edit after you push
+REPO = "https://github.com/ledinhminhquan/20_Text_Search_in_Images.git"  # <-- edit after you push
 
 
 def md(text):
@@ -48,7 +48,7 @@ CELLS.append(code(
     "#@title Controls { run: 'auto' }\n"
     "USE_DRIVE = True           #@param {type:'boolean'}\n"
     "CLONE_FROM_GIT = True      #@param {type:'boolean'}\n"
-    "GIT_URL = 'https://github.com/<your-username>/20_Text_Search_in_Images.git'  #@param {type:'string'}\n"
+    "GIT_URL = 'https://github.com/ledinhminhquan/20_Text_Search_in_Images.git'  #@param {type:'string'}\n"
     "TRAIN_RETRIEVER = True     #@param {type:'boolean'}\n"
     "USE_REAL_DATA = False      #@param {type:'boolean'}   # index a real HF collection instead of synthetic\n"
     "EPOCHS = 2                 #@param {type:'integer'}\n"
