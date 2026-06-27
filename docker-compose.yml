@@ -1,0 +1,21 @@
+services:
+  imgtextsearch:
+    build: .
+    image: imgtextsearch:latest
+    ports:
+      - "8000:8000"
+    environment:
+      IMGTEXT_ARTIFACTS_DIR: /data/artifacts
+      HF_HOME: /data/hf
+      IMGTEXT_USE_HF: "0"            # synthetic collection by default; set 1 to index a real dataset
+    volumes:
+      - imgtext_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/healthz').status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  imgtext_data:

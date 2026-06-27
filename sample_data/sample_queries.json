@@ -1,0 +1,11 @@
+{
+  "description": "Example queries for `imgtextsearch search --query ...` over the seed/synthetic collection.",
+  "queries": [
+    {"query": "REF3386", "kind": "exact_code", "note": "a unique code printed in exactly one image -> rank-1 exact match"},
+    {"query": "invoice", "kind": "keyword", "note": "a shared keyword present in several images -> multi-gold recall"},
+    {"query": "receipt", "kind": "keyword", "note": "another shared keyword"},
+    {"query": "2023", "kind": "keyword", "note": "a year token appearing in many images"},
+    {"query": "total", "kind": "keyword", "note": "a common business-document term"},
+    {"query": "zzqwx", "kind": "absent", "note": "appears in NO image -> the agent must ABSTAIN ('not found')"}
+  ]
+}

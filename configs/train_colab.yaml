@@ -1,0 +1,26 @@
+# Colab/H100 training override (the notebook writes a GPU-profiled copy of this).
+# Larger batch + more pairs for the dense retriever; the notebook auto-scales batch by GPU tier.
+
+data:
+  use_hf: false          # set true (+ collection_dataset) to index a real TextOCR/DocVQA collection
+  collection_size: 400
+  seed: 42
+
+model:
+  base_model: "BAAI/bge-small-en-v1.5"
+  max_seq_length: 256
+  num_train_epochs: 2
+  per_device_train_batch_size: 128    # H100; the notebook lowers this for A100/L4/T4
+  learning_rate: 2.0e-5
+  warmup_ratio: 0.1
+  bf16: true
+  tf32: true
+
+index:
+  top_k: 20
+  use_bm25: true
+  use_dense: true
+  use_faiss: true
+
+agent:
+  llm_fallback_enabled: false

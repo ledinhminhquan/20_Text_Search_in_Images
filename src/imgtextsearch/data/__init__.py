@@ -1,0 +1,1 @@
+"""imgtextsearch.data subpackage."""

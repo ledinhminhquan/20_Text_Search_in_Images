@@ -1,0 +1,8 @@
+# Core runtime — the package, offline SeedEngine OCR, the synthetic generator, the BM25 index,
+# the metrics, the agent and the full test-suite run with ONLY these (no torch / tesseract).
+# Install the heavy extras from pyproject for training / serving / reports:
+#   pip install -e ".[all]"   (or .[ml], .[ocr], .[api], .[report])
+numpy>=1.23
+pyyaml>=6.0
+pydantic>=2.0
+Pillow>=9.5

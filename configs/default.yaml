@@ -1,0 +1,56 @@
+# Default configuration — Text Search within Images (imgtextsearch).
+# All paths come from env vars (IMGTEXT_ARTIFACTS_DIR / _DATA_DIR / _MODEL_DIR / _RUN_DIR, HF_HOME);
+# this file only overrides knobs. Unknown keys are ignored by load_config.
+
+project_title: "Text Search within Images System"
+author: "Le Dinh Minh Quan"
+student_id: "23127460"
+
+data:
+  ocr_text_dataset: "PleIAs/Post-OCR-Correction"   # CC0 OCR-noise text source
+  collection_dataset: "MiXaiLL76/TextOCR_OCR"       # MIT scene-text image+text (real collection)
+  docvqa_dataset: "nielsr/docvqa_1200_examples"     # query + gold-span supervision (license-FLAG)
+  use_hf: false                                     # default to the synthetic generator
+  collection_size: 200
+  image_width: 768
+  seed: 42
+
+ocr:
+  engine: "auto"        # auto -> SeedEngine offline, Tesseract when installed
+  lang: "eng"
+  psm: 6
+
+model:
+  base_model: "BAAI/bge-small-en-v1.5"   # MIT — the trainable dense text retriever
+  max_seq_length: 256
+  num_train_epochs: 1
+  per_device_train_batch_size: 64
+  learning_rate: 2.0e-5
+  warmup_ratio: 0.1
+  bf16: true
+  tf32: true
+
+index:
+  top_k: 20
+  use_bm25: true
+  use_dense: true
+  use_faiss: true
+  rrf_k: 60
+
+agent:
+  min_query_chars: 1
+  coverage_min_score: 0.05
+  require_exact: true
+  exact_match_fuzzy: true
+  snippet_window: 6
+  abstain_enabled: true
+  n_results: 10
+  llm_fallback_enabled: false       # the LLM brain is OFF by default
+  llm_model: "claude-opus-4-8"
+  llm_api_key_env: "ANTHROPIC_API_KEY"
+
+serving:
+  api_title: "Text Search within Images API"
+  api_version: "1.0.0"
+  log_jobs: true
+  model_version: "latest"
